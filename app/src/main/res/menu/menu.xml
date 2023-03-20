@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/year_2006_2010"
+        android:title="2006-2010">
+
+        <menu>
+            <item
+                android:id="@+id/year_2006"
+                android:title="2006" />
+            <item
+                android:id="@+id/year_2007"
+                android:title="2007" />
+            <item
+                android:id="@+id/year_2008"
+                android:title="2008" />
+            <item
+                android:id="@+id/year_2009"
+                android:title="2009" />
+            <item
+                android:id="@+id/year_2010"
+                android:title="2010" />
+        </menu>
+
+    </item>
+
+    <item
+        android:id="@+id/year_2011_2015"
+        android:title="2011-2015">
+
+        <menu>
+            <item
+                android:id="@+id/year_2011"
+                android:title="2011" />
+            <item
+                android:id="@+id/year_2012"
+                android:title="2012" />
+            <item
+                android:id="@+id/year_2013"
+                android:title="2013" />
+            <item
+                android:id="@+id/year_2014"
+                android:title="2014" />
+            <item
+                android:id="@+id/year_2015"
+                android:title="2015" />
+        </menu>
+
+    </item>
+    <item
+        android:id="@+id/year_2016_2020"
+        android:title="2016-2020">
+
+        <menu>
+            <item
+                android:id="@+id/year_2016"
+                android:title="2016" />
+            <item
+                android:id="@+id/year_2017"
+                android:title="2017" />
+            <item
+                android:id="@+id/year_2018"
+                android:title="2018" />
+            <item
+                android:id="@+id/year_2019"
+                android:title="2019" />
+            <item
+                android:id="@+id/year_2020"
+                android:title="2020" />
+        </menu>
+
+    </item>
+
+    <item
+        android:id="@+id/refresh"
+        android:icon="@drawable/ic_baseline_refresh_24"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:icon="@drawable/ic_baseline_sort_24"
+        app:showAsAction="ifRoom">
+        <menu>
+            <item
+                android:id="@+id/byAsc"
+                android:title="Low to High" />
+            <item
+                android:id="@+id/byDesc"
+                android:title="High to Low" />
+        </menu>
+
+    </item>
+
+</menu>
