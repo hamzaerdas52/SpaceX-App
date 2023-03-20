@@ -83,10 +83,10 @@
         <menu>
             <item
                 android:id="@+id/byAsc"
-                android:title="Low to High" />
+                android:title="Old to New" />
             <item
                 android:id="@+id/byDesc"
-                android:title="High to Low" />
+                android:title="New to Old" />
         </menu>
 
     </item>
