@@ -5,18 +5,20 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.hamzaerdas.spacexapp.model.LaunchDetail
 import com.hamzaerdas.spacexapp.service.SpaceXService
+import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.observers.DisposableSingleObserver
 import io.reactivex.schedulers.Schedulers
+import javax.inject.Inject
 
-class DetailViewModel : ViewModel() {
+@HiltViewModel
+class DetailViewModel @Inject constructor(private val spaceXService: SpaceXService) : ViewModel() {
 
     val launch = MutableLiveData<List<LaunchDetail>>()
     val loadingData = MutableLiveData<Boolean>()
     val errorData = MutableLiveData<Boolean>()
 
-    private val spaceXService = SpaceXService()
     private val disposable = CompositeDisposable()
 
     fun getLaunch(number: Int){

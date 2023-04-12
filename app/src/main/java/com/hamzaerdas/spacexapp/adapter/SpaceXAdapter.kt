@@ -9,11 +9,11 @@ import com.hamzaerdas.spacexapp.databinding.RecyclerRowBinding
 import com.hamzaerdas.spacexapp.model.Launch
 import com.hamzaerdas.spacexapp.util.recyclerViewDownAnimation
 import com.hamzaerdas.spacexapp.view.DetailActivity
+import javax.inject.Inject
 
-class SpaceXAdapter() : RecyclerView.Adapter<SpaceXAdapter.SpaceXViewHolder>() {
+class SpaceXAdapter @Inject constructor() : RecyclerView.Adapter<SpaceXAdapter.SpaceXViewHolder>() {
 
     private val launchList = ArrayList<Launch>()
-    private var scrollDown = false
 
     class SpaceXViewHolder(val binding: RecyclerRowBinding) : RecyclerView.ViewHolder(binding.root) {
     }

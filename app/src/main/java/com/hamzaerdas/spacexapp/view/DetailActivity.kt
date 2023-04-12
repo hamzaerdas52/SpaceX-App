@@ -5,21 +5,23 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.view.View
+import androidx.activity.viewModels
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModelProviders
 import com.hamzaerdas.spacexapp.R
 import com.hamzaerdas.spacexapp.databinding.ActivityDetailBinding
 import com.hamzaerdas.spacexapp.model.LaunchDetail
 import com.hamzaerdas.spacexapp.util.changeBackground
 import com.hamzaerdas.spacexapp.util.detailAnimation
 import com.hamzaerdas.spacexapp.viewmodel.DetailViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
 
+@AndroidEntryPoint
 class DetailActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityDetailBinding
-    private lateinit var viewModel: DetailViewModel
+    private val viewModel: DetailViewModel by viewModels()
     private var number: Int = 0
     private lateinit var launchDetail: LaunchDetail
 
@@ -32,7 +34,7 @@ class DetailActivity : AppCompatActivity() {
         supportActionBar?.hide()
 
         intentInitialize()
-        viewModelInitialize()
+        getData()
         observeData()
         goBack()
 
@@ -44,8 +46,7 @@ class DetailActivity : AppCompatActivity() {
         number = intent.getIntExtra("number", 1)
     }
 
-    private fun viewModelInitialize() {
-        viewModel = ViewModelProviders.of(this@DetailActivity)[DetailViewModel::class.java]
+    private fun getData() {
         viewModel.getLaunch(number)
     }
 

@@ -9,6 +9,7 @@ import android.view.View
 import android.widget.LinearLayout
 import android.widget.SearchView
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.annotation.RequiresApi
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.RecyclerView
@@ -20,14 +21,18 @@ import com.hamzaerdas.spacexapp.model.Launch
 import com.hamzaerdas.spacexapp.util.Constants.MAIN_BG
 import com.hamzaerdas.spacexapp.util.changeBackground
 import com.hamzaerdas.spacexapp.viewmodel.MainViewModel
+import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
+import javax.inject.Inject
 import kotlin.collections.ArrayList
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
-    private lateinit var viewModel: MainViewModel
-    private val adapter = SpaceXAdapter()
+    private val viewModel: MainViewModel by viewModels()
+    @Inject
+    lateinit var adapter: SpaceXAdapter
     private lateinit var dataList: List<Launch>
     private lateinit var searchView: SearchView
 
@@ -39,7 +44,6 @@ class MainActivity : AppCompatActivity() {
 
         binding.mainBgImage.changeBackground(MAIN_BG, binding, 1)
 
-        viewModelInitialize()
         getData()
         recyclerViewInitialize()
         observeData()
@@ -47,11 +51,7 @@ class MainActivity : AppCompatActivity() {
         swipeRefresh()
     }
 
-    private fun viewModelInitialize() {
-        viewModel = ViewModelProviders.of(this@MainActivity)[MainViewModel::class.java]
-    }
-
-    private fun getData(){
+    private fun getData() {
         viewModel.getAllData()
     }
 
@@ -77,9 +77,9 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        viewModel.loadingData.observe(this@MainActivity){
+        viewModel.loadingData.observe(this@MainActivity) {
             it?.let {
-                if(it){
+                if (it) {
                     binding.includeLoadingLayout.loadingLayout.visibility = View.VISIBLE
                     binding.includeErrorLayout.errorLayout.visibility = View.GONE
                     binding.spaceXRecyclerView.visibility = View.GONE
@@ -90,14 +90,14 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        viewModel.errorData.observe(this@MainActivity){
+        viewModel.errorData.observe(this@MainActivity) {
             it?.let {
-                if (it){
+                if (it) {
                     binding.includeErrorLayout.errorLayout.visibility = View.VISIBLE
                     binding.includeLoadingLayout.loadingLayout.visibility = View.GONE
                     binding.spaceXRecyclerView.visibility = View.GONE
                     binding.searchView.visibility = View.GONE
-                } else  {
+                } else {
                     binding.includeErrorLayout.errorLayout.visibility = View.GONE
                     binding.spaceXRecyclerView.visibility = View.VISIBLE
                     binding.searchView.visibility = View.VISIBLE
@@ -202,10 +202,10 @@ class MainActivity : AppCompatActivity() {
             }
         })
 
-        binding.spaceXRecyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener(){
+        binding.spaceXRecyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                 super.onScrollStateChanged(recyclerView, newState)
-                if(newState == RecyclerView.SCROLL_STATE_DRAGGING){
+                if (newState == RecyclerView.SCROLL_STATE_DRAGGING) {
                     searchView.clearFocus()
                 }
             }
@@ -231,7 +231,7 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    private fun swipeRefresh(){
+    private fun swipeRefresh() {
         binding.swipeRefreshMain.setOnRefreshListener {
             binding.includeLoadingLayout.loadingLayout.visibility = View.VISIBLE
             binding.includeErrorLayout.errorLayout.visibility = View.GONE
